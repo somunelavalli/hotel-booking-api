@@ -5,8 +5,6 @@ const jwt = require('jsonwebtoken');
 const createError = require('../utils/error');
 
 const register = async (req, res, next) => {
-  console.log('I am coming hereeee');
-  console.log('Env Variables ::: ', process.env.MONGO_URI);
   try {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
@@ -15,9 +13,7 @@ const register = async (req, res, next) => {
       email: req.body.email,
       password: hash,
     });
-    console.log('New User :::', newUser);
     const savedUser = await newUser.save();
-    console.log('Saved User :::', savedUser);
     res.status(201).json(savedUser);
   } catch (err) {
     next(err);
