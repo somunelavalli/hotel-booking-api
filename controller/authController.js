@@ -16,7 +16,6 @@ const register = async (req, res, next) => {
     });
     console.log('New User :::', newUser);
     const savedUser = await newUser.save();
-    console.log('-----------------');
     console.log('Saved User :::', savedUser);
     res.status(201).json(savedUser);
   } catch (err) {

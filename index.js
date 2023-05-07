@@ -7,6 +7,8 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
+console.log('Env Variables ::: ', process.env.MONGO_URI);
+
 const connect = async () => {
   try {
     console.log('Before DB Connection');
