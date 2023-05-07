@@ -22,6 +22,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
+app.get('/', (req, res) => {
+  res.status(200).send('Hello Welcome to my new world');
+});
+
 app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/hotel', require('./routes/hotels'));
 app.use('/api/v1/user', require('./routes/auth'));
