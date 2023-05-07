@@ -12,7 +12,9 @@ console.log('Env Variables ::: ', process.env.MONGO_URI);
 const connect = async () => {
   try {
     console.log('Before DB Connection');
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(
+      'mongodb+srv://m001-student:Thanvi25022019@sandbox.a5x9y.mongodb.net/HotelBooking?retryWrites=true&w=majority'
+    );
     console.log('After DB Connection');
     console.log('Connected to Mongod DB');
   } catch (err) {
