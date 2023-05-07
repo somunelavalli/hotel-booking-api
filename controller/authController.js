@@ -43,6 +43,7 @@ const login = async (req, res, next) => {
       .status(200)
       .json({ ...otherDetails });
   } catch (err) {
+    console.log('Error is :::', err);
     next(err);
   }
 };
