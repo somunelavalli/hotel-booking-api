@@ -9,7 +9,9 @@ const port = process.env.PORT || 3000;
 
 const connect = async () => {
   try {
+    console.log('Before DB Connection');
     await mongoose.connect(process.env.MONGO_URI);
+    console.log('After DB Connection');
     console.log('Connected to Mongod DB');
   } catch (err) {
     throw err;

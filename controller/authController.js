@@ -14,7 +14,9 @@ const register = async (req, res, next) => {
       email: req.body.email,
       password: hash,
     });
+    console.log('New User :::', newUser);
     const savedUser = await newUser.save();
+    console.log('Saved User :::', savedUser);
     res.status(201).json(savedUser);
   } catch (err) {
     next(err);
