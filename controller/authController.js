@@ -9,7 +9,7 @@ const register = async (req, res, next) => {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
     const newUser = new User({
-      userName: req.body.userName,
+      mobile: req.body.mobile,
       email: req.body.email,
       password: hash,
     });
@@ -22,7 +22,7 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    const user = await User.findOne({ userName: req.body.userName });
+    const user = await User.findOne({ email: req.body.email });
     if (!user) return next(createError(404, 'User not found'));
     const isPasswordCorrect = await bcrypt.compareSync(
       req.body.password,
