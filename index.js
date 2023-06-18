@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3003;
 
 const connect = async () => {
   try {
@@ -30,6 +30,7 @@ app.use('/api/v1/user', require('./routes/auth'));
 app.use('/api/v1/userdata', require('./routes/users'));
 app.use('/api/v1/room', require('./routes/rooms'));
 app.use('/api/v1/health', require('./routes/health'));
+app.use('/api/v1/payment/order', require('./routes/payment'));
 
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;
