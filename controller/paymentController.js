@@ -1,11 +1,10 @@
 const Razorpay = require('razorpay');
+const instance = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
 
-const orders = async (req, res) => {
-  const instance = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
-  });
-
+const order = async (req, res) => {
   const options = {
     amount: req.body.amount * 100,
     currency: 'INR',
@@ -53,4 +52,22 @@ const verify = async (req, res) => {
   }
 };
 
-module.exports = { orders, verify };
+const getAllOrders = async (req, res) => {
+  instance.orders
+    .all({
+      from: req.body.from,
+      to: req.body.to,
+    })
+    .then((resp) => {
+      //   console.log(resp, 60);
+      return res
+        .status(200)
+        .send({ message: 'Data successfully Fetched', data: resp.items });
+    })
+    .catch((err) => {
+      console.log(err, 62);
+      res.status(500).send({ message: 'Something Wrong', data: err });
+    });
+};
+
+module.exports = { order, verify, getAllOrders };
