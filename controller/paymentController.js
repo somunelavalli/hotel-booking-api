@@ -39,7 +39,7 @@ const verify = async (req, res) => {
     let body = req.body.response.razorpay_order_id + '|' + req.body.response.razorpay_payment_id;
     console.log('I am coming to try block in verify2 :::');
     var expectedSignature = crypto
-      .createHmac('sha256', KEY_SECRET)
+      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
       .update(body.toString())
       .digest('hex');
     console.log('expectedSignature is :::', expectedSignature);
