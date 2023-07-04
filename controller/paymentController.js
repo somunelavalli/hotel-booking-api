@@ -32,7 +32,7 @@ const order = async (req, res) => {
 const verify = async (req, res) => {
   console.log('Response is :::', JSON.stringify(req.body));
   console.log('razorpayOrderId is :::', req.body.response.razorpay_order_id);
-  console.log('razorpayPaymentId is :::', req.body.response.razorpay_payment_id;
+  console.log('razorpayPaymentId is :::', req.body.response.razorpay_payment_id);
   console.log('razorpayPaymentId is :::', req.body.response.razorpay_signature);
   try {
     let body = req.body.response.razorpay_order_id + '|' + req.body.response.razorpay_payment_id;
