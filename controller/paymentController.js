@@ -35,8 +35,9 @@ const verify = async (req, res) => {
   console.log('razorpayPaymentId is :::', req.body.response.razorpay_payment_id);
   console.log('razorpayPaymentId is :::', req.body.response.razorpay_signature);
   try {
+    console.log('I am coming to try block in verify :::');
     let body = req.body.response.razorpay_order_id + '|' + req.body.response.razorpay_payment_id;
-
+    console.log('I am coming to try block in verify2 :::');
     var expectedSignature = crypto
       .createHmac('sha256', KEY_SECRET)
       .update(body.toString())
