@@ -31,11 +31,11 @@ const order = async (req, res) => {
 
 const verify = async (req, res) => {
   console.log('Response is :::', JSON.stringify(req.body));
-  console.log('razorpayOrderId is :::', req.body.razorpayOrderId);
-  console.log('razorpayPaymentId is :::', req.body.razorpayPaymentId);
-  console.log('razorpayPaymentId is :::', req.body.razorpayPaymentId);
+  console.log('razorpayOrderId is :::', req.body.response.razorpay_order_id);
+  console.log('razorpayPaymentId is :::', req.body.response.razorpay_payment_id;
+  console.log('razorpayPaymentId is :::', req.body.response.razorpay_signature);
   try {
-    let body = req.body.razorpayOrderId + '|' + req.body.razorpayPaymentId;
+    let body = req.body.response.razorpay_order_id + '|' + req.body.response.razorpay_payment_id;
 
     var expectedSignature = crypto
       .createHmac('sha256', KEY_SECRET)
@@ -43,7 +43,7 @@ const verify = async (req, res) => {
       .digest('hex');
     console.log('expectedSignature is :::', expectedSignature);
 
-    if (expectedSignature === req.body.razorpaySignature) {
+    if (expectedSignature === req.body.response.razorpay_signature) {
       console.log('sign is validddd');
       res.send({ code: 200, message: 'Sign Valid' });
     } else {
