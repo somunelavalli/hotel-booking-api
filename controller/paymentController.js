@@ -1,5 +1,5 @@
 const Razorpay = require('razorpay');
-var crypto = require("crypto");
+var crypto = require('crypto');
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
@@ -31,19 +31,15 @@ const order = async (req, res) => {
 };
 
 const verify = async (req, res) => {
-  console.log('Response is :::', JSON.stringify(req.body));
-  console.log('razorpayOrderId is :::', req.body.response.razorpay_order_id);
-  console.log('razorpayPaymentId is :::', req.body.response.razorpay_payment_id);
-  console.log('razorpayPaymentId is :::', req.body.response.razorpay_signature);
   try {
-    console.log('I am coming to try block in verify :::');
-    let body = req.body.response.razorpay_order_id + '|' + req.body.response.razorpay_payment_id;
-    console.log('I am coming to try block in verify2 :::');
+    let body =
+      req.body.response.razorpay_order_id +
+      '|' +
+      req.body.response.razorpay_payment_id;
     var expectedSignature = crypto
       .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
       .update(body.toString())
       .digest('hex');
-    console.log('expectedSignature is :::', expectedSignature);
 
     if (expectedSignature === req.body.response.razorpay_signature) {
       console.log('sign is validddd');

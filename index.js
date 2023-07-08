@@ -31,6 +31,7 @@ app.use('/api/v1/userdata', require('./routes/users'));
 app.use('/api/v1/room', require('./routes/rooms'));
 app.use('/api/v1/health', require('./routes/health'));
 app.use('/api/v1/payment/order', require('./routes/payment'));
+app.use('/api/v1/booking', require('./routes/booking'))
 
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;
