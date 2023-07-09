@@ -1,5 +1,6 @@
 const Razorpay = require('razorpay');
-var crypto = require('crypto');
+const crypto = require('crypto');
+const generateBookingId = require('../helpers/bookingIdGeneration')
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
@@ -19,9 +20,10 @@ const order = async (req, res) => {
           .status(500)
           .send({ message: 'Something went wrong with server', data: err });
       } else {
+        let response = {...order, bookingId: generateBookingId()}
         return res
           .status(200)
-          .send({ message: 'Order created Successfully', data: order });
+          .send({ message: 'Order created Successfully', data: response });
       }
     });
   } catch (err) {
